@@ -1,8 +1,10 @@
+using Application_Layer.CQRS.Commands.Command;
 using Application_Layer.Services;
 using Domain.Entities;
 using Domain.Services;
 using Infrastructure_Layer.Context;
 using Login.Controllers;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -38,10 +40,11 @@ builder.Services.AddSession(options =>
 });
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
         .AddEntityFrameworkStores<MyDbContext>().AddDefaultTokenProviders();
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining(typeof(LoginCommand)));
 
 
 
-
+    
 
 
 
